@@ -5,7 +5,7 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "gh-pages": "ng build --base-href 'https://ethanrwilson1998.github.io/' --prod && npx ngh --dir=www/",
+    "gh-pages": "ng build --base-href 'https://ethanrwilson1998.github.io/myWebsite' --prod && npx ngh --dir=www/",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
