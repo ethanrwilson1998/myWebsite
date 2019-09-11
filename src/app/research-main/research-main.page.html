@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card button="true" href="/locomotion">
+  <ion-card button="true" (click)="goToLocomotionPage()">
     <ion-card-header>
       <ion-card-title>Learning Locomotion using a Keyframe-based System</ion-card-title>
     </ion-card-header>
@@ -39,7 +39,7 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button style="margin:auto;width:100%;" href="/locomotion">View</ion-button>
+            <ion-button style="margin:auto;width:100%;" (click)="goToLocomotionPage()">View</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>
