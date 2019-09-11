@@ -43,7 +43,7 @@ PARAGRAPH_3
   </ion-card>
 
 VIDEO:
-  <ion-card color="secondary">
+  <ion-card color="secondary" style="margin:auto;width:60%;">
     <ion-card-content>
       <ion-card color="dark" style="padding:10px">
       <video controls="controls" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;">
@@ -54,7 +54,7 @@ VIDEO:
   </ion-card>
 
 IMAGE:
-  <ion-card color="tertiary">
+  <ion-card color="tertiary" style="margin:auto;width:60%;">
     <ion-card-content>
       <ion-card color="dark" style="padding:10px">
 	      <img style="height:100%;width:auto;display:block;margin-left:auto;margin-right:auto;" src="assets/loco/img/NAME.png" alt="" />
@@ -63,6 +63,8 @@ IMAGE:
   </ion-card>
 
   -->
+
+  
 
   <ion-card>
     <ion-card-header>
@@ -79,7 +81,7 @@ My goal was to create a physics-based animation system that could import custom 
     </ion-card-content>
   </ion-card>
 
-  <ion-card color="secondary">
+  <ion-card color="secondary" style="margin:auto;width:60%;">
     <ion-card-content>
       <ion-card color="dark" style="padding:10px">
       <video controls="controls" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;">
@@ -101,7 +103,7 @@ Recent improvements in computational technology have opened the gateway to apply
     </ion-card-content>
   </ion-card>
 
-  <ion-card color="secondary">
+  <ion-card color="secondary" style="margin:auto;width:60%;">
     <ion-card-content>
       <ion-card color="dark" style="padding:10px">
       <video controls="controls" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;">
@@ -120,7 +122,7 @@ My implementation used a Genetic Algorithm (GA), an evolutionary algorithm in wh
     </ion-card-content>
   </ion-card>
 
-  <ion-card color="secondary">
+  <ion-card color="secondary" style="margin:auto;width:60%;">
     <ion-card-content>
       <ion-card color="dark" style="padding:10px">
       <video controls="controls" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;">
@@ -151,7 +153,7 @@ At runtime, the controller tracks to a pose and constantly computes an error val
     </ion-card-content>
   </ion-card>
 
-  <ion-card color="secondary">
+  <ion-card color="secondary" style="margin:auto;width:60%;">
     <ion-card-content>
       <ion-card color="dark" style="padding:10px">
       <video controls="controls" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;">
@@ -170,7 +172,7 @@ A genetic algorithm (GA) is a framework for solving optimization problems which 
     </ion-card-content>
   </ion-card>
 
-  <ion-card color="secondary">
+  <ion-card color="secondary" style="margin:auto;width:60%;">
     <ion-card-content>
       <ion-card color="dark" style="padding:10px">
       <video controls="controls" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;">
@@ -192,13 +194,13 @@ A model is composed of various body sections, which are connected by joints.  Th
     </ion-card-content>
       <ion-list color="tertiary" lines="none" style="margin:auto;width:80%;">
         <ion-item>
-1.  Revolute joints contain one DOF.  An example would be a human’s elbow, which can only rotate along the bicep’s orientation.  Notice, however, that as the shoulder moves the elbow’s global rotation also changes, so the revolute joint’s constraint is only local to the body part it is placed on.
+1.  Revolute joints contain one DOF.  An example would be a human's elbow, which can only rotate along the bicep's orientation.  Notice, however, that as the shoulder moves the elbow's global rotation also changes, so the revolute joint's constraint is only local to the body part it is placed on.
         </ion-item>
         <ion-item>
-2.  Universal joints contain two DOFs.  An example is the human knee, which can rotate along the thigh’s orientation or rotate slightly along the calf’s axis.  It can not rotate all the way around the thigh due to having two axes of rotation in a 3D space.
+2.  Universal joints contain two DOFs.  An example is the human knee, which can rotate along the thigh's orientation or rotate slightly along the calf's axis.  It can not rotate all the way around the thigh due to having two axes of rotation in a 3D space.
         </ion-item>
         <ion-item>
-3.  Euler joints contain three DOFs, and can rotate along all axes.  An example is the shoulder.  Notice that the shoulder still has value constraints.  It can rotate along every axis, but the extent of rotation is limited by the person’s flexibility.
+3.  Euler joints contain three DOFs, and can rotate along all axes.  An example is the shoulder.  Notice that the shoulder still has value constraints.  It can rotate along every axis, but the extent of rotation is limited by the person's flexibility.
         </ion-item>
         <ion-item>
 4.  Free joints connect two separate objects and contain three DOFs for rotation and three DOFs for position.  These joints can not be directly manipulated and exist solely to inform the simulation.
@@ -208,11 +210,145 @@ A model is composed of various body sections, which are connected by joints.  Th
         </ion-item>
       </ion-list>
     <ion-card-content>
-Limiting the number of DOFs on a model would decrease computation time, so models were created creatively to have the simplest combination of joints while still being able to achieve motion similar to the creatures they were modeled after.  In addition, I limited the values of these DOFs within the DNA to have a roughly 90 degree range.  This restriction acted similarly to a human shoulder in that without constraints, a shoulder would be able to clip into its attached body.  This helped to both keep movement natural and to decrease the problem’s search space significantly.
+Limiting the number of DOFs on a model would decrease computation time, so models were created creatively to have the simplest combination of joints while still being able to achieve motion similar to the creatures they were modeled after.  In addition, I limited the values of these DOFs within the DNA to have a roughly 90 degree range.  This restriction acted similarly to a human shoulder in that without constraints, a shoulder would be able to clip into its attached body.  This helped to both keep movement natural and to decrease the problem's search space significantly.
     </ion-card-content>
     <ion-card-content>
 To save additional computation time, for symmetrical models I implemented a mirror system.  Each piece of DNA would only contain info for half of a walk cycle, which would then be mirrored over at the beginning of the evaluation phase.  This halved the amount of data in the GA, which exponentially decreased search time.  
     </ion-card-content>
+  </ion-card>
+
+  <ion-card color="secondary" style="margin:auto;width:60%;">
+    <ion-card-content>
+      <ion-card color="dark" style="padding:10px">
+      <video controls="controls" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;">
+        <source src="assets/loco/video/alien_crawl.mp4" type="video/mp4">
+      </video>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Fitness Evaluation</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+Every evaluation stage of the GA, all DNA need to be run against a fitness function so that they can be ranked as effective solutions to the problem at hand.  My fitness functions varied for different models, but were all based around running a DART simulation for a specific amount of time and returning a value based on how far forward the model travelled.  
+    </ion-card-content>
+    <ion-card-content>
+Some models needed more complicated fitness functions to accommodate unexpected behaviors that arose.  The agent's only goal is to get the highest score, so without extra bounds to restrict movement, the best solution the GA founds could be an unnatural looking exploit.  For example, when given a simple "go forward" fitness function, my quadruped model discovered that it could travel fastest by somersaulting instead of walking.  To fix this, I added the constraint in which the agent's average foot-to-ground distance influenced the highest score.  This heavily penalized the somersault behavior without discouraging a regular walk cycle.
+    </ion-card-content>
+    <ion-card-content>
+The most common exploit agents found were that they could use their poses to perform one large jump instantly, and the distance they traveled would be further than an actual walk cycle.  The agent would get stuck at this local maxima for many generations.  I hypothesize that given a large enough simulation runtime and enough training generations this behavior would self-correct, but I did not have the patience to run any tests long enough to see this happen (three days were not long enough).  More specific results will be explained in a later section.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="secondary" style="margin:auto;width:60%;">
+    <ion-card-content>
+      <ion-card color="dark" style="padding:10px">
+      <video controls="controls" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;">
+        <source src="assets/loco/video/quad_slow_walk.mp4" type="video/mp4">
+      </video>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Evolution</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+My methods for mutation and crossover were customized to accomodate my specific locomotion problem.  My mutation function would take a DNA sequence, choose a random pose from within the list, and randomly select two DOFs to change.  These DOFs were reassigned random values within the 90 degree target range.  My mutation function's goal was to discover slight tweaks that could finely tweak the balance of a model's walk cycle.  My method for crossover focused only on the poses, ignoring the specific values contained in each pose.  Two parent DNA were chosen randomly from the population and their pose combinations were permuted to produce unique children.  The parents and children were all returned into the population.
+    </ion-card-content>
+    <ion-card-content>
+The evolution stage of my algorithm would repeatedly perform crossovers between random parents.  This grew the overall population, so the repeated crossovers terminated once the new population reached a certain size.  At that point, the entire [large] population would be evaluated and sorted based on the genomes' fitness evaluation.  Then the population would be culled back to its original size, with checks put in place to prevent identical DNA copies from surviving.  By only performing crossovers, the population eventually would normalize and mix to the point of little genetic variation.
+    </ion-card-content>
+    <ion-card-content>
+The algorithm kept track of a population's average fitness as well as the highest individual and underwent a special period of "forced evolution" if no significant growth was made over multiple generations.  This forced evolution period consisted of rapid mutations and the generation of entirely random new DNA.  If a generated DNA was deemed fit, it would be inserted into the population.  Once the population had been sufficiently revitalized, the algorithm would continue and the regular crossover evolution would resume.  The forced evolution stage's purpose was to work around the local maxima and broaden the algorithm's search space to find better solutions.  As the found solution became better, the forced evolutionary period would take longer and would (typically) result in less extreme jumps in progress.  This gave me insight for when to terminate the program, as progress would eventually slow enough to not be worth the runtime.  
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="secondary" style="margin:auto;width:60%;">
+    <ion-card-content>
+      <ion-card color="dark" style="padding:10px">
+      <video controls="controls" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;">
+        <source src="assets/loco/video/duck_fail.mp4" type="video/mp4">
+      </video>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Results</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+My goal to create stable physics-based walk cycles was achieved.  Despite having limited hardware, my learning algorithm provided consistent, quick results.  The algorithm would converge upon a solution within 8 hours of testing, with simpler models taking less time.  Tests that ran longer had only marginal efficiency gains.  
+    </ion-card-content>
+    <ion-card-content>
+A secondary goal was for the motion to look realistic and mimic that of real creatures' walk cycles.  While none of my motion looked robotic, it also did not look completely organic.  The walk cycles tended to look sluggish.  Smaller motions that do not change the model's center of gravity are typically more stable, so the solutions the algorithm produced tended not to have large movements.  Another reason is the manually set tracking and damping strength.  I set these values relatively low, which resulted in weaker creatures.  I did this mainly because weaker creatures have less unexpected behaviors; therefore, their fitness functions' constraints are easier to write and quicker to test.
+    </ion-card-content>
+    <ion-card-content>
+Some of the unexpected behaviors were insightful and quite entertaining to look at.  For example, the quadruped that opted to somersault shows what organic motion might have been like if there was no concept of tiredness.  Some models were designed with specific motions in mind, but performed entirely differently.  I designed a creature with two legs and a large tail, thinking it would propel itself forward with the tail; instead, it decided to lift the tail in the air and crawl.
+    </ion-card-content>
+    <ion-card-content>
+I discovered that I could add early termination to the fitness functions of some models to speed up the training period.  If I could identify a behavior that a walk cycle would never have, such as the model being upside down or high up in the air, a conditional in my code would give that DNA a very low score and terminate the simulation early.  This shortcut improved early performance greatly, when DNA were prone to random motion, and become less impactful further on as DNA converged to a stable solution.  
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="secondary" style="margin:auto;width:60%;">
+    <ion-card-content>
+      <ion-card color="dark" style="padding:10px">
+      <video controls="controls" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;">
+        <source src="assets/loco/video/alien_lifted_tail.mp4" type="video/mp4">
+      </video>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Future Implications</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+This method of locomotion learning is structured very similarly to the keyframe system present in traditional animation.  Because of this similarity, traditional animation skeletons could be ported into the learning algorithm.  If this method were refined and tweaked to search for a local maxima based on the ported animation, the program would be able to finely tweak hand-made animations to become stable and physically accurate.  Obviously, hand-made animation is made to look realistic rather than be realistic, so there is no guarantee that a physically accurate animation would look better.  If nothing else, a video game or film that employed this technique would have some added novelty.  As an alternative, animators could simply use the program as a training tool to practice their realism.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="secondary" style="margin:auto;width:60%;">
+    <ion-card-content>
+      <ion-card color="dark" style="padding:10px">
+      <video controls="controls" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;">
+        <source src="assets/loco/video/quad_butt_scoot.mp4" type="video/mp4">
+      </video>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Citations</ion-card-title>
+    </ion-card-header>
+      <ion-list color="tertiary" lines="none" style="margin:auto;width:80%;">
+        <ion-item style="padding:5px;">
+[1]     Kodjabachian, J., and J.-A. Meyer. 1998. "Evolution and Development of Neural 
+Controllers for Locomotion, Gradient-Following, and Obstacle-Avoidance in 
+Artificial Insects." IEEE Transactions on Neural Networks 9 (5): 796-812. 
+doi:10.1109/72.712153.
+        </ion-item>
+        <ion-item style="padding:5px;">
+[2]    Yin, KangKang, Kevin Loken, and Michiel van de Panne. "SIMBICON: Simple Biped 
+Locomotion Control." Simbicon Project Webpage. University of British Columbia. 
+https://www.cs.ubc.ca/~van/papers/Simbicon.htm. 
+        </ion-item>
+        <ion-item style="padding:5px;">
+[3]    "Dynamic Animation and Robotics Toolkit." DART, Georgia Tech and Carnegie 
+Mellon University, 6 June 2019, https://dartsim.github.io.
+        </ion-item>
+        <ion-item style="padding:5px;">
+[4]    Tan, Jie, Karen Liu, and Greg Turk. "Stable Proportional-Derivative Controllers." 
+http://www.jie-tan.net/project/spd.html.
+        </ion-item>
+      </ion-list>
   </ion-card>
 
 
