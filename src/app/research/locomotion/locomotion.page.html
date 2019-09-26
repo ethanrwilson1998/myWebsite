@@ -10,16 +10,16 @@
 <ion-content>
   <ion-card>
     <ion-card-header>
-      <ion-card-title style="font-size:2em;">Learning Locomotion using a Keyframe-based System</ion-card-title>
+      <ion-card-title style="font-size:45px;">Using a Genetic Algorithm to Implement Pose Tracking for Locomotion Control</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-card-subtitle style="font-size:1.5em;">Ethan Wilson</ion-card-subtitle>
-      <ion-card-subtitle style="font-size:1.5em;">Greg Turk</ion-card-subtitle>
-      <ion-card-subtitle style="font-size:1.5em;">Yunbo Zhang</ion-card-subtitle>
+      <ion-card-subtitle style="font-size:1.3em;">Ethan Wilson</ion-card-subtitle>
+      <ion-card-subtitle style="font-size:1.3em;">Greg Turk</ion-card-subtitle>
+      <ion-card-subtitle style="font-size:1.3em;">Yunbo Zhang</ion-card-subtitle>
     </ion-card-content>
   </ion-card>
   <ion-card color="tertiary" button="true" href="assets/loco/draft.docx" download="draft.docx">
-      <ion-card-content style="text-align:center;"><h2>Download Paper</h2></ion-card-content>
+      <ion-card-content style="text-align:center;">Download</ion-card-content>
   </ion-card>
 
   <!-- 
@@ -71,13 +71,19 @@ IMAGE:
       <ion-card-title>Introduction</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-Animated motion of a digital character / model is derived from a few different methods which depend on the simulation environment.  Traditional animation, applied in video games, animated film, etc., keeps a record of keyframes, or values for the rotation of joints within  a model's underlying skeleton.  These keyframes correspond to different points in time, and the program interpolates between them to generate the animation.  These keyframes are typically either animated by hand or obtained through motion capture technology.  
+The goal of this project is to create an animation system that can import custom models and generate stable walk cycles (i.e. completing multiple cycles without falling over, yet still moving in the forward direction) within an affordable amount of time.  There are several existing ways to animate a character; the most common methods include keyframes, motion capture, and physics-based animations.
+    </ion-card-content>
+    <ion-card-content>
+Animated motion of a digital character is derived from a few different methods which depend on the simulation environment.  Traditional animation, applied in video games, animated film, etc., keeps a record of keyframes, or values for the rotation of joints within  a model's underlying skeleton.  These keyframes correspond to different points in time, and the program interpolates between them to generate the animation.  These keyframes are typically animated by hand; therefore, they might not be physically accurate motions.
+    </ion-card-content>
+    <ion-card-content>
+Motion capture is a method that relies on tracking markers on a real person using video cameras.  These markers typically are placed near important joints on the person.  This motion captured data can then be used to animate a character with a similar build to the physical model, or it can be remapped to a different model entirely.  When data is retargeted to a new model, it may become physically implausible.
     </ion-card-content>
     <ion-card-content>
 Animations that must conform to the laws of physics, i.e. existing within physics simulations, must be animated in a different manner.  Real humans / creatures perform an infinite amount of subconscious motions to preserve balance and save energy, but it would take an exorbitant amount of time for a human animator to replicate those balance changes using keyframes in a physical simulation.  Without those corrections, realistic-looking animation loops might lose their stability over time, resulting in the agent falling over, and successfully human-animated motion would likely look robotic or simulated.
     </ion-card-content>
     <ion-card-content>
-My goal was to create a physics-based animation system that could import custom models and generate stable walk cycles [i.e. completing multiple cycles without falling over, yet still moving in the forward direction] within an affordable amount of time. 
+My approach is physics-based and meant to be stable for as long as possible within a physical simulation.  In order to achieve this, I have implemented a genetic algorithm that finds and fine-tunes keyframe poses for a given model.
     </ion-card-content>
   </ion-card>
 
@@ -96,10 +102,13 @@ My goal was to create a physics-based animation system that could import custom 
       <ion-card-title>Related Work</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-Traditionally, the solution for animating with respect to physical constraints has been to employ some heuristic optimization algorithm.  Heuristic algorithms do not search for a single perfect solution; instead they approximate a solution that is "good enough" and can be found in a reasonable amount of time.  These algorithms are especially effective in locomotion because of the large problem space (there are infinite variations of acceptable forms of locomotion).  Evolutionary algorithms work particularly well as they tend to avoid local maxima and can indefinitely continue searching for a more efficient solution.  For example, Kodjabachian used an evolutionary approach to build a neural network controller for simulated two-dimensional insects.  These insects were able to learn locomotion and perform higher level behaviors, such as obstacle avoidance and an odor-gradient food detection system[1].
+Traditionally, the solution for animating with respect to physical constraints has been to employ some heuristic optimization algorithm.  Heuristic algorithms do not search for a single perfect solution; instead they approximate a solution that is "good enough" and can be found in a reasonable amount of time.  These algorithms are especially effective in locomotion because of the large problem space (there are infinite variations of acceptable forms of locomotion).  Evolutionary algorithms work particularly well as they tend to avoid local maxima and can indefinitely continue searching for a more efficient solution.  For example, Kodjabachian used an evolutionary approach to build a neural network controller for simulated two-dimensional insects.  These insects were able to learn locomotion and perform higher level behaviors, such as obstacle avoidance and an odor-gradient food detection system [1].
     </ion-card-content>
     <ion-card-content>
-Recent improvements in computational technology have opened the gateway to apply more computationally expensive algorithms.  Reinforcement learning (RL), a subset of machine learning that balances an agent's environmental exploration vs. exploitation, has become an especially popular method.  There are various existing implementations of RL locomotion training, and some have extended functionality for various scenarios.  An example is Simbicon, a three-dimensional biped locomotion controller that incorporated the ability to react to varied terrain and outside forces[2].  However, these solutions remain too computationally expensive to perform without a dedicated setup.  While a research lab might be able to afford a week of training on a dedicated multi-GPU system, I am restricted to using a mid-range laptop.
+Recent improvements in computational technology have opened the gateway to apply more computationally expensive algorithms.  Reinforcement learning (RL), a subset of machine learning that balances an agent's environmental exploration vs. exploitation, has become an especially popular method.  There are various existing implementations of RL locomotion training, an example being DeepLoco for bipedal locomotion.  The DeepLoco approach implements two RL controllers that operate cooperatively.  The high-level controller makes broad decisions such as where to step to reach the high-level goal, while the lower-level controller performs quick computations such as balance corrections [2].  However, these solutions remain too computationally expensive to perform without a dedicated setup.  While a research lab might be able to afford a week of training on a dedicated multi-GPU system, I am restricted to using a mid-range laptop.
+    </ion-card-content>
+    <ion-card-content>
+Some locomotion implementations have extended the core walking functionality for various scenarios.  DeepLoco's high-level goal-setting implementation allowed the model to follow non-uniform paths or even dribble a soccer ball.  Another example is Simbicon, a three-dimensional biped locomotion controller that incorporates a state machine populated with distinct poses to interpolate between.  This approach allows models to react to varied terrain and outside forces by choosing an appropriate pose and performing simultaneous balance computations [3].  
     </ion-card-content>
   </ion-card>
 
@@ -118,7 +127,7 @@ Recent improvements in computational technology have opened the gateway to apply
       <ion-card-title>My Approach</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-My implementation used a Genetic Algorithm (GA), an evolutionary algorithm in which various DNA compete within a population that evolves over time.  In order to save computation time and limit the problem's search space, I opted to model my DNA after the keyframe system present in traditional animation.  Thus, my solution is prone to the problems animators face (discussed in the introduction), but it is able to achieve significantly more precise values than any human animator could. 
+The goal of my system is to create a locomotion controller for a given character anatomy.  My implementation used a Genetic Algorithm (GA), an evolutionary algorithm in which various character controllers compete within a population that evolves over time.  The best character controllers (the ones that move the character the farthest) are propagated to the next generation, possibly with crossover and mutation. In order to save computation time and limit the problem's search space, I opted to model the character's genome after the keyframe system used in traditional animation.  The genome of a particular controller is a small collection of character poses (typically 2 to 4) that are represented as joint angles.  The motion for the character is given by interpolating between this set of poses.
     </ion-card-content>
   </ion-card>
 
@@ -134,19 +143,22 @@ My implementation used a Genetic Algorithm (GA), an evolutionary algorithm in wh
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Skel Controller within DART</ion-card-title>
+      <ion-card-title>Character Controller within DART</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-The physics simulation I chose to use was the Dynamic Animation and Robotics Toolkit (DART).  DART is an open-source library that was written at the Georgia Institute of Technology collaboratively by the Graphics Lab and Humanoid Robotics Lab[3].  I chose DART both because it is an ideal environment for simulating rigid body systems and because of my advisors' experience with the program.  
+The physics simulation I chose to use was the Dynamic Animation and Robotics Toolkit (DART).  DART is an open-source library that was written at the Georgia Institute of Technology collaboratively by the Graphics Lab and Humanoid Robotics Lab [4].  I chose DART both because it is an ideal environment for simulating rigid body systems and because of my advisors' experience with the simulator.  
     </ion-card-content>
     <ion-card-content>
-DART's functionality includes a customizable controller for every rigid body entity within the simulation.  This controller can be used to dynamically apply torque to the joints of the rigid body during the simulation's runtime.  The controller I implemented was an extension of the Stable Proportional-Derivative (SPD) controller[4].  In the context of a rigidbody system, a SPD controller provides stable tracking to a target pose.  This is achieved by applying a control force to the rigid body's joints, computed using the joint's current kinematics, the target position, and the simulation's timestep.  A proportional gain (tracking strength) and derivative gain (damping strength) are included in the equation used and can be changed to tweak the tracking intensity.  SPD controllers differ from traditional Proportional-Derivative (PD) controllers in their calculation; SPD use a computed estimate of the simulation's next time-step rather than the current time-step.  This method ensures stability when undergoing large motions or high time steps, whereas the traditional PD controller may break down.
+DART's functionality includes a customizable controller for every rigid body entity within the simulation.  This controller can be used to dynamically apply torque to the joints of the rigid body during a given simulation.  The controller I implemented was an extension of the Stable Proportional-Derivative (SPD) controller [5].  In the context of a rigidbody system, a SPD controller provides stable tracking to a target pose.  This is achieved by applying a control force to the rigid body's joints, computed using the joint's current kinematics, the target position, and the simulation's timestep.  A proportional gain (tracking strength) and derivative gain (damping strength) are included in the equation used and can be changed to tweak the tracking intensity.  SPD controllers differ from traditional Proportional-Derivative (PD) controllers in their calculation; SPD use a computed estimate of the simulation's next time-step rather than the current time-step.  This method ensures stability when undergoing large motions or high time steps, whereas the traditional PD controller may break down.
     </ion-card-content>
     <ion-card-content>
 My controller utilizes the SPD controller's computations for all torque calculations.  At the initialization phase of the simulation, my controller is fed a list of tracking poses.  Then, when applicable, these poses are mirrored and/or interpolated to generate a large cycle of poses for the controller to use.  
     </ion-card-content>
     <ion-card-content>
-To mirror a pose, specific values within the pose (referred to as degrees of freedom, explained in-depth in a later section) that map from left to right are transferred to the opposite side, and vice versa.  The code to mirror depends on the model at hand.  Interpolation can be applied generally to any model.  To interpolate, two adjacent poses from within the loop are chosen.  Multiple intermediate poses are generated by linearly interpolating between the two chosen poses.  These generated poses are then added to a new list which ends up being much larger.  This process is repeated between each adjacent pair of poses, with the interpolated poses being added to the same new list, which finally replaces the initial list of poses.
+Many characters have a symmetric anatomy and use the same (mirrored) motions on both sides of their body.  To mirror a pose, specific values within the pose (referred to as degrees of freedom, explained in-depth in a later section) that map from left to right are transferred to the opposite side, and vice versa.  The code to mirror depends on the model at hand.  In effect, mirroring doubles the number of keyframe poses for a given character controller.
+    </ion-card-content>
+    <ion-card-content>
+During locomotion, the character's pose is given by smooth interpolation between the given keyframes.  To interpolate, two adjacent poses from within the loop are chosen.  Multiple intermediate poses are generated by linearly interpolating between the two chosen poses.  These generated poses are then added to a new list which ends up being much larger.  This process is repeated between each adjacent pair of poses, with the interpolated poses being added to the same new list, which finally replaces the initial list of poses.
     </ion-card-content>
     <ion-card-content>
 At runtime, the controller tracks to a pose and constantly computes an error value between the model's current position and the pose being tracked.  Once this error drops beneath a specific value, the target pose shifts to the next pose in the list.  Using error to determine when to track a new pose differs from animation's traditional keyframe approach, where the tracking of keyframes are based completely on time.  My approach generated smoother motions than a linear time-based system would; additionally, this system discouraged unexpected behaviors by adding physical constraints to the rigidbody.  If a model was unable to reach its next pose (from falling over and being blocked by the ground, or any other reason), it would get stuck, whereas a strictly time-based keyframe system's model would ignore the fact that it was stuck and continue attempting to reach poses, resulting in unnatural, spastic motion.
@@ -168,7 +180,7 @@ At runtime, the controller tracks to a pose and constantly computes an error val
       <ion-card-title>Genetic Algorithm</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-A genetic algorithm (GA) is a framework for solving optimization problems which is based upon the process of natural selection found in biological evolution.  Different solutions to the problem, referred to as genomes, are initially randomly generated by the algorithm.  These genomes are stored in a list of fixed size known as the population.  The algorithm progresses by alternating between evolutionary and evaluation stages.  At each evaluation stage, every genome in the population is tested against a fitness function and given a score which corresponds to how effectively they have solved the problem.  The evolutionary stage typically involves a combination of crossover and mutation.  Crossover is a process in which two genomes, now known as the parents, are selected from the population and their information is combined to produce some number of children.  Mutation takes in a single genome sequence and slightly changes some of its values, creating a slightly different solution to the problem.  Crossover and mutations are performed on the population in an effort to produce better solutions that can be used in later generations.  At the end of each evolutionary stage, the population, which may contain extra DNA from crossover, must be culled back to its original size.
+A genetic algorithm (GA) is a framework for solving optimization problems which is based upon the process of natural selection found in biological evolution.  Different potential solutions to a given problem, referred to as genomes, are initially randomly generated by the algorithm.  These genomes are stored in a list of fixed size known as the population.  The algorithm progresses by alternating between evolutionary and evaluation stages.  At each evaluation stage, every genome in the population is tested against a fitness function and given a score which corresponds to how effectively they have solved the problem.  The fitness functions in my implementation are customized per-model, but all functions are built upon giving a high reward for the longest distance travelled.  The evolutionary stage typically involves a combination of crossover and mutation.  Crossover is a process in which two genomes, now known as the parents, are selected from the population and their information is combined to produce some number of children.  Mutation takes in a single genome sequence and slightly changes some of its values, creating a slightly different solution to the problem.  Crossover and mutations are performed on the population in an effort to produce better solutions that can be used in later generations.  At the end of each evolutionary stage, the population, which may contain extra genome data from crossover, must be culled back to its original size.
     </ion-card-content>
   </ion-card>
 
@@ -187,10 +199,10 @@ A genetic algorithm (GA) is a framework for solving optimization problems which 
       <ion-card-title>Data Storage</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-I chose to represent my DNA as a list of target poses for the controller within DART to use.  Every pose was a list of values, and each value corresponded to the rotation value of one degrees of freedom (DOF) within the model.  
+As described above, I chose to represent the genomes as a list of target poses for the controller within DART to use.  Every pose was a list of values, and each value corresponded to the rotation value of one degrees of freedom within the model.  
     </ion-card-content>
     <ion-card-content>
-A model is composed of various body sections, which are connected by joints.  There are multiple joint classifications to choose from, with the more complicated joint types having more DOFs.  A DOF is a single value that corresponds to one axis of rotation in the world (the axis can be of any orientation, however).  The types of joints are as follows:
+A model is composed of various body sections, which are connected by joints.  There are multiple joint classifications to choose from, with the more complicated joint types having more degrees of freedom (DOFs).  A DOF is a single value that corresponds to one axis of rotation in the world (the axis can be of any orientation, however).  The types of joints are as follows:
     </ion-card-content>
       <ion-list color="tertiary" lines="none" style="margin:auto;width:80%;">
         <ion-item>
@@ -210,10 +222,10 @@ A model is composed of various body sections, which are connected by joints.  Th
         </ion-item>
       </ion-list>
     <ion-card-content>
-Limiting the number of DOFs on a model would decrease computation time, so models were created creatively to have the simplest combination of joints while still being able to achieve motion similar to the creatures they were modeled after.  In addition, I limited the values of these DOFs within the DNA to have a roughly 90 degree range.  This restriction acted similarly to a human shoulder in that without constraints, a shoulder would be able to clip into its attached body.  This helped to both keep movement natural and to decrease the problem's search space significantly.
+Limiting the number of DOFs on a model would decrease computation time, so models were created creatively to have the simplest combination of joints while still being able to achieve motion similar to the creatures they were modeled after.  In addition, I limited the values of these DOFs within the genome to have a roughly 90 degree range.  This restriction acted similarly to a human shoulder in that without constraints, a shoulder would be able to clip into its attached body.  This helped to both keep movement natural and to decrease the problem's search space significantly.
     </ion-card-content>
     <ion-card-content>
-To save additional computation time, for symmetrical models I implemented a mirror system.  Each piece of DNA would only contain info for half of a walk cycle, which would then be mirrored over at the beginning of the evaluation phase.  This halved the amount of data in the GA, which exponentially decreased search time.  
+To save additional computation time, for symmetrical models I implemented a mirror system.  Each genome would only contain info for half of a walk cycle, which is then mirrored over at the beginning of the evaluation phase.  This halved the amount of data in the GA, which decreased search time.  
     </ion-card-content>
   </ion-card>
 
@@ -232,10 +244,10 @@ To save additional computation time, for symmetrical models I implemented a mirr
       <ion-card-title>Fitness Evaluation</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-Every evaluation stage of the GA, all DNA need to be run against a fitness function so that they can be ranked as effective solutions to the problem at hand.  My fitness functions varied for different models, but were all based around running a DART simulation for a specific amount of time and returning a value based on how far forward the model travelled.  
+Every evaluation stage of the GA, each genome needs to be run against a fitness function so that they can be ranked as effective solutions to the problem at hand.  My fitness functions varied for different models, but were all based around running a DART simulation for a specific amount of time and returning a value based on how far forward the model travelled.  
     </ion-card-content>
     <ion-card-content>
-Some models needed more complicated fitness functions to accommodate unexpected behaviors that arose.  The agent's only goal is to get the highest score, so without extra bounds to restrict movement, the best solution the GA founds could be an unnatural looking exploit.  For example, when given a simple "go forward" fitness function, my quadruped model discovered that it could travel fastest by somersaulting instead of walking.  To fix this, I added the constraint in which the agent's average foot-to-ground distance influenced the highest score.  This heavily penalized the somersault behavior without discouraging a regular walk cycle.
+Some models needed more complicated fitness functions to accommodate unexpected behaviors that arise.  The agent's only goal is to get the highest score, so without extra bounds to restrict movement, the best solution the GA founds could be an unnatural looking exploit.  For example, when given a simple "go forward" fitness function, my quadruped model discovered that it could travel fastest by somersaulting instead of walking.  To fix this, I added the constraint in which the agent's average foot-to-ground distance influenced the highest score.  This heavily penalized the somersault behavior without discouraging a regular walk cycle.
     </ion-card-content>
     <ion-card-content>
 The most common exploit agents found were that they could use their poses to perform one large jump instantly, and the distance they traveled would be further than an actual walk cycle.  The agent would get stuck at this local maxima for many generations.  I hypothesize that given a large enough simulation runtime and enough training generations this behavior would self-correct, but I did not have the patience to run any tests long enough to see this happen (three days were not long enough).  More specific results will be explained in a later section.
@@ -257,13 +269,13 @@ The most common exploit agents found were that they could use their poses to per
       <ion-card-title>Evolution</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-My methods for mutation and crossover were customized to accomodate my specific locomotion problem.  My mutation function would take a DNA sequence, choose a random pose from within the list, and randomly select two DOFs to change.  These DOFs were reassigned random values within the 90 degree target range.  My mutation function's goal was to discover slight tweaks that could finely tweak the balance of a model's walk cycle.  My method for crossover focused only on the poses, ignoring the specific values contained in each pose.  Two parent DNA were chosen randomly from the population and their pose combinations were permuted to produce unique children.  The parents and children were all returned into the population.
+My methods for mutation and crossover were customized to accomodate my specific locomotion problem.  My mutation function would take a genome sequence, choose a random pose from within the list, and randomly select two DOFs to change.  These DOFs were reassigned random values within the 90 degree target range.  My mutation function's goal was to discover slight tweaks that could finely tweak the balance of a model's walk cycle.  My method for crossover focused only on the poses, ignoring the specific values contained in each pose.  Two parent genomes were chosen randomly from the population and their pose combinations were permuted to produce unique children.  The parents and children were all returned into the population.
     </ion-card-content>
     <ion-card-content>
-The evolution stage of my algorithm would repeatedly perform crossovers between random parents.  This grew the overall population, so the repeated crossovers terminated once the new population reached a certain size.  At that point, the entire [large] population would be evaluated and sorted based on the genomes' fitness evaluation.  Then the population would be culled back to its original size, with checks put in place to prevent identical DNA copies from surviving.  By only performing crossovers, the population eventually would normalize and mix to the point of little genetic variation.
+The evolution stage of my algorithm would repeatedly perform crossovers between random parents.  This grew the overall population, so the repeated crossovers terminated once the new population reached a certain size.  At that point, the entire [large] population would be evaluated and sorted based on the genomes' fitness evaluation.  Then the population would be culled back to its original size, with checks put in place to prevent identical genome copies from surviving.  By only performing crossovers, the population eventually would normalize and mix to the point of little genetic variation.
     </ion-card-content>
     <ion-card-content>
-The algorithm kept track of a population's average fitness as well as the highest individual and underwent a special period of "forced evolution" if no significant growth was made over multiple generations.  This forced evolution period consisted of rapid mutations and the generation of entirely random new DNA.  If a generated DNA was deemed fit, it would be inserted into the population.  Once the population had been sufficiently revitalized, the algorithm would continue and the regular crossover evolution would resume.  The forced evolution stage's purpose was to work around the local maxima and broaden the algorithm's search space to find better solutions.  As the found solution became better, the forced evolutionary period would take longer and would (typically) result in less extreme jumps in progress.  This gave me insight for when to terminate the program, as progress would eventually slow enough to not be worth the runtime.  
+The algorithm kept track of a population's average fitness as well as the highest individual and underwent a special period of "forced evolution" if no significant growth was made over multiple generations.  This forced evolution period consisted of rapid mutations and the generation of entirely random new genome.  If a generated genome was deemed fit, it would be inserted into the population.  Once the population had been sufficiently revitalized, the algorithm would continue and the regular crossover evolution would resume.  The forced evolution stage's purpose was to work around the local maxima and broaden the algorithm's search space to find better solutions.  As the found solution became better, the forced evolutionary period would take longer and would (typically) result in less extreme jumps in progress.  This gave me insight for when to terminate the program, as progress would eventually slow enough to not be worth the runtime.  
     </ion-card-content>
   </ion-card>
 
@@ -282,7 +294,7 @@ The algorithm kept track of a population's average fitness as well as the highes
       <ion-card-title>Results</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-My goal to create stable physics-based walk cycles was achieved.  Despite having limited hardware, my learning algorithm provided consistent, quick results.  The algorithm would converge upon a solution within 8 hours of testing, with simpler models taking less time.  Tests that ran longer had only marginal efficiency gains.  
+My goal to create stable physics-based walk cycles was achieved.  Despite having limited hardware, my learning algorithm provided consistent, quick results.  Population size ranged between 30 and 50 during testing.  The algorithm would typically  converge upon a solution within 8 hours, with simpler models taking less time.  This timeframe translates to roughly 75 generations, but could be less or more depending on the length of each simulation (typically 5 - 8 seconds) and the amount of forced evolutionary periods triggered.  Tests that ran longer had only marginal efficiency gains.  
     </ion-card-content>
     <ion-card-content>
 A secondary goal was for the motion to look realistic and mimic that of real creatures' walk cycles.  While none of my motion looked robotic, it also did not look completely organic.  The walk cycles tended to look sluggish.  Smaller motions that do not change the model's center of gravity are typically more stable, so the solutions the algorithm produced tended not to have large movements.  Another reason is the manually set tracking and damping strength.  I set these values relatively low, which resulted in weaker creatures.  I did this mainly because weaker creatures have less unexpected behaviors; therefore, their fitness functions' constraints are easier to write and quicker to test.
@@ -291,7 +303,7 @@ A secondary goal was for the motion to look realistic and mimic that of real cre
 Some of the unexpected behaviors were insightful and quite entertaining to look at.  For example, the quadruped that opted to somersault shows what organic motion might have been like if there was no concept of tiredness.  Some models were designed with specific motions in mind, but performed entirely differently.  I designed a creature with two legs and a large tail, thinking it would propel itself forward with the tail; instead, it decided to lift the tail in the air and crawl.
     </ion-card-content>
     <ion-card-content>
-I discovered that I could add early termination to the fitness functions of some models to speed up the training period.  If I could identify a behavior that a walk cycle would never have, such as the model being upside down or high up in the air, a conditional in my code would give that DNA a very low score and terminate the simulation early.  This shortcut improved early performance greatly, when DNA were prone to random motion, and become less impactful further on as DNA converged to a stable solution.  
+I discovered that I could add early termination to the fitness functions of some models to speed up the training period.  If I could identify a behavior that a walk cycle would never have, such as the model being upside down or high up in the air, a conditional in my code would give that genome a very low score and terminate the simulation early.  This shortcut improved early performance greatly, when genome were prone to random motion, and become less impactful further on as genome converged to a stable solution.  
     </ion-card-content>
   </ion-card>
 
@@ -326,32 +338,33 @@ This method of locomotion learning is structured very similarly to the keyframe 
 
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Citations</ion-card-title>
+      <ion-card-title>References</ion-card-title>
     </ion-card-header>
       <ion-list color="tertiary" lines="none" style="margin:auto;width:80%;">
         <ion-item style="padding:5px;">
-[1]     Kodjabachian, J., and J.-A. Meyer. 1998. "Evolution and Development of Neural 
-Controllers for Locomotion, Gradient-Following, and Obstacle-Avoidance in 
-Artificial Insects." IEEE Transactions on Neural Networks 9 (5): 796-812. 
-doi:10.1109/72.712153.
+[1]     Kodjabachian, Jerome, and J-A. Meyer. "Evolution and development of neural 
+controllers for locomotion, gradient-following, and obstacle-avoidance in artificial 
+insects." IEEE transactions on neural networks 9, no. 5 (1998): 796-812.
         </ion-item>
         <ion-item style="padding:5px;">
-[2]    Yin, KangKang, Kevin Loken, and Michiel van de Panne. "SIMBICON: Simple Biped 
-Locomotion Control." Simbicon Project Webpage. University of British Columbia. 
-https://www.cs.ubc.ca/~van/papers/Simbicon.htm. 
+[2]    Peng, Xue Bin, Glen Berseth, KangKang Yin, and Michiel Van De Panne. "Deeploco: 
+Dynamic locomotion skills using hierarchical deep reinforcement learning." ACM 
+Transactions on Graphics (TOG) 36, no. 4 (2017): 41.
         </ion-item>
         <ion-item style="padding:5px;">
-[3]    "Dynamic Animation and Robotics Toolkit." DART, Georgia Tech and Carnegie 
-Mellon University, 6 June 2019, https://dartsim.github.io.
+[3]    Yin, KangKang, Kevin Loken, and Michiel Van de Panne. "Simbicon: Simple biped 
+locomotion control." In ACM Transactions on Graphics (TOG), vol. 26, no. 3, p. 105. 
+ACM, 2007.
         </ion-item>
         <ion-item style="padding:5px;">
-[4]    Tan, Jie, Karen Liu, and Greg Turk. "Stable Proportional-Derivative Controllers." 
-http://www.jie-tan.net/project/spd.html.
+[4]    "Dynamic Animation and Robotics Toolkit." DART, Georgia Tech and Carnegie 
+Mellon University, 6 June 2019, https://dartsim.github.io. 
+        </ion-item>
+        <ion-item style="padding:5px;">
+[5]    Tan, Jie, Karen Liu, and Greg Turk. "Stable proportional-derivative controllers." IEEE 
+Computer Graphics and Applications 31, no. 4 (2011): 34-44.
         </ion-item>
       </ion-list>
   </ion-card>
-
-
-
 
 </ion-content>
