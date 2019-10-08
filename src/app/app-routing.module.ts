@@ -30,7 +30,8 @@ const routes: Routes = [
   { 
   path: 'locomotion', 
   loadChildren: './research/locomotion/locomotion.module#LocomotionPageModule' 
-  }
+  },  { path: 'worm-wranglers', loadChildren: './projects/worm-wranglers/worm-wranglers.module#WormWranglersPageModule' }
+
 ];
 
 @NgModule({

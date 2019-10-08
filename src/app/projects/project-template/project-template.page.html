@@ -7,6 +7,60 @@
   </ion-toolbar>
 </ion-header>
 
+  <!-- 
+TEMPLATE:
+
+TEXT SECTION:
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>SECTION_HEADER</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+PARAGRAPH_1
+    </ion-card-content>
+    <ion-card-content>
+PARAGRAPH_2
+    </ion-card-content>
+    <ion-card-content>
+PARAGRAPH_3
+    </ion-card-content>
+  </ion-card>
+
+VIDEO:
+  <ion-card color="secondary" style="margin:auto;width:60%;">
+    <ion-card-content>
+      <ion-card color="dark" style="padding:10px">
+      <video controls="controls" style="display:block;width:100%;height:auto;margin-left:auto;margin-right:auto;">
+        <source src="assets/loco/video/NAME.mp4" type="video/mp4">
+      </video>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+
+IMAGE:
+  <ion-card color="tertiary" style="margin:auto;width:60%;">
+    <ion-card-content>
+      <ion-card color="dark" style="padding:10px">
+	      <img style="height:100%;width:auto;display:block;margin-left:auto;margin-right:auto;" src="assets/loco/img/NAME.png" alt="" />
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+
+  -->
+
 <ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="font-size:45px;">Title</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card-subtitle style="font-size:1.3em;">Tagline</ion-card-subtitle>
+    </ion-card-content>
+  </ion-card>
+  <ion-card color="tertiary" button="true" href="assets/x.pdf" download="x.pdf">
+      <ion-card-content style="text-align:center;">Download as PDF</ion-card-content>
+  </ion-card>
 
 </ion-content>

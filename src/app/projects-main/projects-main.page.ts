@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular'
 
 @Component({
   selector: 'app-projects-main',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProjectsMainPage implements OnInit {
 
-  constructor() { }
+  constructor(public navCtrl: NavController) { }
 
   ngOnInit() {
+  }
+
+  goToProjectTemplatePage() {
+    this.navCtrl.navigateForward('/project-template');
+  }
+
+  goToWormWranglers() {
+    this.navCtrl.navigateForward('/worm-wranglers');
   }
 
 }

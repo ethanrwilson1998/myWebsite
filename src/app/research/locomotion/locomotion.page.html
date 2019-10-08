@@ -18,8 +18,8 @@
       <ion-card-subtitle style="font-size:1.3em;">Yunbo Zhang</ion-card-subtitle>
     </ion-card-content>
   </ion-card>
-  <ion-card color="tertiary" button="true" href="assets/loco/draft.docx" download="draft.docx">
-      <ion-card-content style="text-align:center;">Download</ion-card-content>
+  <ion-card color="tertiary" button="true" href="assets/loco/Using a Genetic Algorithm to Implement Pose Tracking for Locomotion Control.pdf" download="Using a Genetic Algorithm to Implement Pose Tracking for Locomotion Control.pdf">
+      <ion-card-content style="text-align:center;">Download as PDF</ion-card-content>
   </ion-card>
 
   <!-- 
@@ -305,6 +305,9 @@ Some of the unexpected behaviors were insightful and quite entertaining to look 
     <ion-card-content>
 I discovered that I could add early termination to the fitness functions of some models to speed up the training period.  If I could identify a behavior that a walk cycle would never have, such as the model being upside down or high up in the air, a conditional in my code would give that genome a very low score and terminate the simulation early.  This shortcut improved early performance greatly, when genome were prone to random motion, and become less impactful further on as genome converged to a stable solution.  
     </ion-card-content>
+    <ion-card-content>
+(The downloadable PDF of this paper describes specific results for each model tested.)
+</ion-card-content>
   </ion-card>
 
   <ion-card color="secondary" style="margin:auto;width:60%;">
