@@ -21,4 +21,8 @@ export class ProjectsMainPage implements OnInit {
     this.navCtrl.navigateForward('/worm-wranglers');
   }
 
+  goToDarkSoulsFour() {
+    this.navCtrl.navigateForward('/dark-souls-four');
+  }
+
 }

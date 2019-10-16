@@ -30,7 +30,8 @@ const routes: Routes = [
   { 
   path: 'locomotion', 
   loadChildren: './research/locomotion/locomotion.module#LocomotionPageModule' 
-  },  { path: 'worm-wranglers', loadChildren: './projects/worm-wranglers/worm-wranglers.module#WormWranglersPageModule' }
+  },  { path: 'worm-wranglers', loadChildren: './projects/worm-wranglers/worm-wranglers.module#WormWranglersPageModule' },
+  { path: 'dark-souls-four', loadChildren: './projects/dark-souls-four/dark-souls-four.module#DarkSoulsFourPageModule' }
 
 ];
 
